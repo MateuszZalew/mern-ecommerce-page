@@ -1,7 +1,18 @@
 import express from "express";
+import "dotenv/config";
+const connectDB = require("./db/connect");
 
 const app = express();
 
-app.listen(3001, () => {
-  console.log("Server is listening at http://localhost:3001");
-});
+const startServer = async () => {
+  try {
+    await connectDB(process.env.MONGO_URI);
+    app.listen(3001, () => {
+      console.log("Server is listening at http://localhost:3001");
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+startServer();
