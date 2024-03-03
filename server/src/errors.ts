@@ -3,3 +3,9 @@ export enum UserErrors {
   WRONG_CREDENTIALS = "wrong-credentials",
   USERNAME_ALREADY_EXISTS = "username-already-exists",
 }
+
+export enum ProductErrors {
+  NO_PRODUCT_FOUND = "no-product-found",
+  OUT_OF_STOCK = "out-of-stock",
+  NO_AVAILABLE_MONEY = "no-available-money",
+}
