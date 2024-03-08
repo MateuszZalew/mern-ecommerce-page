@@ -1,10 +1,17 @@
 import { createContext, useState } from "react";
+import useGetProducts from "../hooks/useGetProducts";
+import { IProduct } from "../models/interfaces";
+import { useGetToken } from "../hooks/useGetToken";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export interface IShopContext {
   addToCart: (itemId: string) => void;
   removeFromCart: (itemId: string) => void;
   updateCartItemCount: (newAmount: number, itemId: string) => void;
   getCartItemCount: (itemId: string) => number;
+  getTotalCartAmount: () => number;
+  checkout: () => void;
 }
 
 const defaultVal: IShopContext = {
@@ -12,11 +19,25 @@ const defaultVal: IShopContext = {
   removeFromCart: () => null,
   updateCartItemCount: () => null,
   getCartItemCount: () => 0,
+  getTotalCartAmount: () => 0,
+  checkout: () => null,
 };
 export const ShopContext = createContext<IShopContext>(defaultVal);
 
 export const ShopContextProvider = (props) => {
   const [cartItems, setCartItems] = useState<{ string: number } | object>({});
+  const [availableMoney, setAvailableMoney] = useState<number>(0);
+
+  const { products } = useGetProducts();
+  const { headers } = useGetToken();
+  const navigate = useNavigate();
+
+  const fetchAvailableMoney = async () => {
+    try {
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const getCartItemCount = (itemId: string): number => {
     if (itemId in cartItems) {
@@ -50,11 +71,43 @@ export const ShopContextProvider = (props) => {
     setCartItems((prevState) => ({ ...prevState, [itemId]: newAmount }));
   };
 
+  const getTotalCartAmount = (): number => {
+    let totalAmount = 0;
+    for (const item in cartItems) {
+      if (cartItems[item] > 0) {
+        const itemInfo: IProduct = products.find(
+          (product) => product._id === item
+        );
+        totalAmount += cartItems[item] * itemInfo.price;
+      }
+    }
+    return totalAmount;
+  };
+
+  const checkout = async () => {
+    const body = {
+      customerID: localStorage.getItem("userID"),
+      cartItems,
+    };
+
+    try {
+      await axios.post("http://localhost:3001/product/checkout", body, {
+        headers,
+      });
+
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const contextValue: IShopContext = {
     addToCart,
     removeFromCart,
     updateCartItemCount,
     getCartItemCount,
+    getTotalCartAmount,
+    checkout,
   };
 
   return (
