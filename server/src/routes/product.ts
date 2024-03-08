@@ -2,6 +2,7 @@ import { Router, Request, Response } from "express";
 import { ProductModel } from "../models/product";
 import { UserModel } from "../models/user";
 import { ProductErrors, UserErrors } from "../errors";
+import { verifyToken } from "./user";
 
 const router = Router();
 
@@ -14,7 +15,7 @@ router.get("/", async (_, res: Response) => {
   }
 });
 
-router.post("/checkout", async (req: Request, res: Response) => {
+router.post("/checkout", verifyToken, async (req: Request, res: Response) => {
   const { customerID, cartItems } = req.body;
 
   try {
