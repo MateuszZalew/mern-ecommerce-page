@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 import useGetProducts from "../hooks/useGetProducts";
 import { IProduct } from "../models/interfaces";
 import { useGetToken } from "../hooks/useGetToken";
@@ -12,6 +12,7 @@ export interface IShopContext {
   getCartItemCount: (itemId: string) => number;
   getTotalCartAmount: () => number;
   checkout: () => void;
+  availableMoney: number;
 }
 
 const defaultVal: IShopContext = {
@@ -21,6 +22,7 @@ const defaultVal: IShopContext = {
   getCartItemCount: () => 0,
   getTotalCartAmount: () => 0,
   checkout: () => null,
+  availableMoney: 0,
 };
 export const ShopContext = createContext<IShopContext>(defaultVal);
 
@@ -34,6 +36,13 @@ export const ShopContextProvider = (props) => {
 
   const fetchAvailableMoney = async () => {
     try {
+      const userID = localStorage.getItem("userID");
+      const res = await axios(
+        `http://localhost:3001/user/available-money/${userID}`,
+        { headers }
+      );
+
+      setAvailableMoney(res.data.availableMoney);
     } catch (err) {
       console.log(err);
     }
@@ -95,11 +104,18 @@ export const ShopContextProvider = (props) => {
         headers,
       });
 
+      setCartItems({});
+      fetchAvailableMoney();
+
       navigate("/");
     } catch (err) {
       console.log(err);
     }
   };
+
+  useEffect(() => {
+    fetchAvailableMoney();
+  }, []);
 
   const contextValue: IShopContext = {
     addToCart,
@@ -108,6 +124,7 @@ export const ShopContextProvider = (props) => {
     getCartItemCount,
     getTotalCartAmount,
     checkout,
+    availableMoney,
   };
 
   return (
