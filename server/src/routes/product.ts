@@ -78,7 +78,7 @@ router.get(
         _id: { $in: user.purchasedItems },
       });
 
-      res.json({ purhcasedItems: products });
+      res.json({ purchasedItems: products });
     } catch (err) {
       res.status(500).json({ err });
     }
