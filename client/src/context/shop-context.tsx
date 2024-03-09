@@ -13,6 +13,7 @@ export interface IShopContext {
   getTotalCartAmount: () => number;
   checkout: () => void;
   availableMoney: number;
+  purchasedItems: IProduct[];
 }
 
 const defaultVal: IShopContext = {
@@ -23,12 +24,14 @@ const defaultVal: IShopContext = {
   getTotalCartAmount: () => 0,
   checkout: () => null,
   availableMoney: 0,
+  purchasedItems: [],
 };
 export const ShopContext = createContext<IShopContext>(defaultVal);
 
 export const ShopContextProvider = (props) => {
   const [cartItems, setCartItems] = useState<{ string: number } | object>({});
   const [availableMoney, setAvailableMoney] = useState<number>(0);
+  const [purchasedItems, setPurchasedItems] = useState<IProduct[]>([]);
 
   const { products } = useGetProducts();
   const { headers } = useGetToken();
@@ -43,6 +46,20 @@ export const ShopContextProvider = (props) => {
       );
 
       setAvailableMoney(res.data.availableMoney);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const fetchPurchasedItems = async () => {
+    try {
+      const userID = localStorage.getItem("userID");
+      const res = await axios(
+        `http://localhost:3001/product/purchased-items/${userID}`,
+        { headers }
+      );
+
+      setPurchasedItems(res.data.purchasedItems);
     } catch (err) {
       console.log(err);
     }
@@ -115,6 +132,7 @@ export const ShopContextProvider = (props) => {
 
   useEffect(() => {
     fetchAvailableMoney();
+    fetchPurchasedItems();
   }, []);
 
   const contextValue: IShopContext = {
@@ -125,6 +143,7 @@ export const ShopContextProvider = (props) => {
     getTotalCartAmount,
     checkout,
     availableMoney,
+    purchasedItems,
   };
 
   return (
