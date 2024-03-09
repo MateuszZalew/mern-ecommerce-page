@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
 import { BsCart3 } from "react-icons/bs";
 import "./styles.css";
+import { useContext } from "react";
+import { ShopContext } from "../context/shop-context";
 
 export const Navbar = () => {
+  const { availableMoney } = useContext(ShopContext);
   return (
     <div className="navbar">
       <div className="navbar-title">
@@ -21,6 +24,9 @@ export const Navbar = () => {
             <BsCart3 />
           </div>
         </Link>
+        <div className="link-container">
+          <span>$ {availableMoney.toFixed(2)}</span>
+        </div>
       </div>
     </div>
   );
