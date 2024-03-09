@@ -63,4 +63,26 @@ router.post("/checkout", verifyToken, async (req: Request, res: Response) => {
   }
 });
 
+router.get(
+  "/purchased-items/:customerID",
+  verifyToken,
+  async (req: Request, res: Response) => {
+    const { customerID } = req.params;
+    try {
+      const user = await UserModel.findById(customerID);
+      if (!user) {
+        res.status(400).json({ type: UserErrors.NO_USER_FOUND });
+      }
+
+      const products = await ProductModel.find({
+        _id: { $in: user.purchasedItems },
+      });
+
+      res.json({ purhcasedItems: products });
+    } catch (err) {
+      res.status(500).json({ err });
+    }
+  }
+);
+
 export { router as productRouter };
