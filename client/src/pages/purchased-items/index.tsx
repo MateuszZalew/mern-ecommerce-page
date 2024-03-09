@@ -14,7 +14,7 @@ const PurchasedItemsPage = () => {
           const { _id, productName, imageURL, price } = item;
           const count = getCartItemCount(_id);
           return (
-            <div className="item">
+            <div className="item" key={_id}>
               <h3>{productName}</h3>
               <img src={imageURL} alt={productName} />
               <p>$ {price}</p>
