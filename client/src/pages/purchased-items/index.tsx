@@ -1,10 +1,16 @@
 import { useContext } from "react";
 import { IShopContext, ShopContext } from "../../context/shop-context";
+import { Navigate } from "react-router-dom";
 import "./styles.css";
 
 const PurchasedItemsPage = () => {
   const { purchasedItems, getCartItemCount, addToCart } =
     useContext<IShopContext>(ShopContext);
+  const { isAuthenticated } = useContext<IShopContext>(ShopContext);
+
+  if (!isAuthenticated) {
+    return <Navigate to="/auth" />;
+  }
 
   return (
     <div className="purchased-items-page">
