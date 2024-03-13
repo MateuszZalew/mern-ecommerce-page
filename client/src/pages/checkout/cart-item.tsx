@@ -20,13 +20,17 @@ const CartItem = (props: Props) => {
         <p>Price: ${price}</p>
 
         <div className="count-handler">
-          <button onClick={() => removeFromCart(_id)}> - </button>
+          <button onClick={() => removeFromCart(_id)} className="minus">
+            -
+          </button>
           <input
             type="number"
             value={cartItemCount}
             onChange={(e) => updateCartItemCount(Number(e.target.value), _id)}
           />
-          <button onClick={() => addToCart(_id)}> + </button>
+          <button onClick={() => addToCart(_id)} className="plus">
+            +
+          </button>
         </div>
       </div>
     </div>
