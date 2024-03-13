@@ -135,7 +135,8 @@ export const ShopContextProvider = (props) => {
       fetchPurchasedItems();
       navigate("/");
     } catch (err) {
-      console.log(err);
+      console.log(err.response.data.type);
+      alert(err.response.data.type);
     }
   };
 
