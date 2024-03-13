@@ -3,15 +3,20 @@ import useGetProducts from "../../hooks/useGetProducts";
 import { IShopContext, ShopContext } from "../../context/shop-context";
 import CartItem from "./cart-item";
 import "./styles.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 
 const CheckoutPage = () => {
   const { getCartItemCount, getTotalCartAmount, checkout } =
     useContext<IShopContext>(ShopContext);
   const { products } = useGetProducts();
   const navigate = useNavigate();
+  const { isAuthenticated } = useContext<IShopContext>(ShopContext);
 
   const totalAmount = getTotalCartAmount();
+
+  if (!isAuthenticated) {
+    return <Navigate to="/auth" />;
+  }
 
   return (
     <div className="cart">
