@@ -13,11 +13,12 @@
   box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
   border-radius: 25px;
   margin: 30px;
+  padding: 16px 0;
 }
 
 .cart-item img {
   width: 200px;
-  margin-left: 50px;
+  margin: 0 50px;
 }
 
 .cart-item .description {
@@ -25,10 +26,30 @@
   font-size: 30px;
 }
 
+.count-handler {
+  display: flex;
+}
+
 .count-handler input {
-  width: 40px;
+  height: 28px;
+  width: 70px;
   text-align: center;
-  font-weight: bolder;
+  margin: 0 8px;
+  font-size: 26px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  display: inline-block;
+  padding: 0;
+  text-align: center;
+}
+
+.minus,
+.plus {
+  width: 28px;
+  height: 28px;
+  background: #f2f2f2;
+  border-radius: 4px;
+  border: 1px solid #ddd;
 }
 
 .checkout button {
