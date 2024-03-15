@@ -4,6 +4,7 @@ import "dotenv/config";
 import { userRouter } from "./routes/user";
 import { productRouter } from "./routes/product";
 const connectDB = require("./db/connect");
+const port = process.env.PORT || 3001;
 
 const app = express();
 
@@ -16,8 +17,8 @@ app.use("/product", productRouter);
 const startServer = async () => {
   try {
     await connectDB(process.env.MONGO_URI);
-    app.listen(3001, () => {
-      console.log("Server is listening at http://localhost:3001");
+    app.listen(port, () => {
+      console.log(`Server is listening at http://localhost:${port}`);
     });
   } catch (error) {
     console.log(error);
