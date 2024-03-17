@@ -30,10 +30,13 @@ const Register = () => {
   const handleSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:3001/user/register", {
-        username,
-        password,
-      });
+      await axios.post(
+        "https://mern-ecommerce-page.onrender.com/user/register",
+        {
+          username,
+          password,
+        }
+      );
       alert("Registration successful. You can now login.");
     } catch (error) {
       if (error.response.data.type === UserErrors.USERNAME_ALREADY_EXISTS) {
@@ -92,10 +95,13 @@ const Login = () => {
   const handleSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
     try {
-      const result = await axios.post("http://localhost:3001/user/login", {
-        username,
-        password,
-      });
+      const result = await axios.post(
+        "https://mern-ecommerce-page.onrender.com/user/login",
+        {
+          username,
+          password,
+        }
+      );
       setCookies("access_token", result.data.token);
       localStorage.setItem("userID", result.data.userID);
       setIsAuthenticated(true);

@@ -50,7 +50,7 @@ export const ShopContextProvider = (props) => {
     try {
       const userID = localStorage.getItem("userID");
       const res = await axios(
-        `http://localhost:3001/user/available-money/${userID}`,
+        `https://mern-ecommerce-page.onrender.com/user/available-money/${userID}`,
         { headers }
       );
 
@@ -64,7 +64,7 @@ export const ShopContextProvider = (props) => {
     try {
       const userID = localStorage.getItem("userID");
       const res = await axios(
-        `http://localhost:3001/product/purchased-items/${userID}`,
+        `https://mern-ecommerce-page.onrender.com/product/purchased-items/${userID}`,
         { headers }
       );
 
@@ -126,9 +126,13 @@ export const ShopContextProvider = (props) => {
     };
 
     try {
-      await axios.post("http://localhost:3001/product/checkout", body, {
-        headers,
-      });
+      await axios.post(
+        "https://mern-ecommerce-page.onrender.com/product/checkout",
+        body,
+        {
+          headers,
+        }
+      );
 
       setCartItems({});
       fetchAvailableMoney();

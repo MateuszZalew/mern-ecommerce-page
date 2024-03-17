@@ -7,7 +7,9 @@ const useGetProducts = () => {
 
   const fetchProducts = async () => {
     try {
-      const fetchedProducts = await axios("http://localhost:3001/product");
+      const fetchedProducts = await axios(
+        "https://mern-ecommerce-page.onrender.com/product"
+      );
       setProducts(fetchedProducts.data.products);
     } catch (error) {
       alert("ERROR: Something went wrong.");
