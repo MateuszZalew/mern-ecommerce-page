@@ -1,4 +1,4 @@
-import { Router, Request, Response } from "express";
+import { Router, Request, Response, NextFunction } from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { UserModel } from "../models/user";
@@ -49,7 +49,11 @@ router.post("/login", async (req: Request, res: Response) => {
   }
 });
 
-export const verifyToken = (req, res, next) => {
+export const verifyToken = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const authHeader = req.headers.authorization;
   if (authHeader) {
     jwt.verify(authHeader, process.env.JWT_SECRET, (err) => {
