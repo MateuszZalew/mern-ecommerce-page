@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import useGetProducts from "../../hooks/useGetProducts";
 import { IShopContext, ShopContext } from "../../context/shop-context";
-import CartItem from "./cart-item";
+import CartItem from "../../components/cart-item";
 import "./styles.css";
 import { useNavigate, Navigate } from "react-router-dom";
 
@@ -15,13 +15,22 @@ const CheckoutPage = () => {
   const totalAmount = getTotalCartAmount();
 
   if (!isAuthenticated) {
-    return <Navigate to="/auth" />;
+    return <Navigate to="/login" />;
   }
 
   return (
     <div className="cart">
       <div>
-        <h1>Your Cart Items</h1>
+        {totalAmount > 0 ? (
+          <>
+            <h1>Your Cart Items</h1>
+            <h2 className="total-cost">
+              Total cost: ${totalAmount.toFixed(2)}
+            </h2>
+          </>
+        ) : (
+          <></>
+        )}
       </div>
 
       <div className="cart">
@@ -34,12 +43,28 @@ const CheckoutPage = () => {
 
       {totalAmount > 0 ? (
         <div className="checkout">
-          <p>Subtotal: ${totalAmount.toFixed(2)}</p>
-          <button onClick={() => navigate("/")}>Continue Shopping</button>
-          <button onClick={checkout}>Checkout</button>
+          <button
+            className="redirect-button"
+            type="button"
+            onClick={() => navigate("/")}
+          >
+            Continue Shopping
+          </button>
+          <button className="redirect-button" type="button" onClick={checkout}>
+            Checkout
+          </button>
         </div>
       ) : (
-        <h1>Your shopping Cart is Empty</h1>
+        <>
+          <h2>Your shopping Cart is Empty</h2>
+          <button
+            className="redirect-button"
+            type="button"
+            onClick={() => navigate("/")}
+          >
+            Go shopping
+          </button>
+        </>
       )}
     </div>
   );
