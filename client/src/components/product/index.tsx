@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { IProduct } from "../../models/interfaces";
-import "./styles.css";
+import "../../pages/shop/styles.css";
 import { IShopContext, ShopContext } from "../../context/shop-context";
 
 interface Props {
