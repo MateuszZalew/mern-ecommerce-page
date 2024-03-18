@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 import { BsCart3 } from "react-icons/bs";
 import "./styles.css";
 import { useContext } from "react";
-import { ShopContext } from "../context/shop-context";
+import { ShopContext } from "../../context/shop-context";
 
-export const Navbar = () => {
+const Navbar = () => {
   const { availableMoney, isAuthenticated, setIsAuthenticated } =
     useContext(ShopContext);
 
@@ -35,7 +35,7 @@ export const Navbar = () => {
                 <BsCart3 />
               </div>
             </Link>
-            <Link to="/auth" onClick={logout}>
+            <Link to="/login" onClick={logout}>
               <div className="link-container">Logout</div>
             </Link>
             <div className="link-container currency-block">
@@ -48,3 +48,5 @@ export const Navbar = () => {
     </div>
   );
 };
+
+export default Navbar;
