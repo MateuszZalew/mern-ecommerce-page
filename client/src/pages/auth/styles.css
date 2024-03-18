@@ -1,21 +1,13 @@
-.auth {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #f2f2f2;
-}
-
 .auth-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: 50px auto;
   padding: 20px;
   background-color: white;
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  margin: 20px;
   width: 500px;
 }
 
@@ -52,7 +44,7 @@ form input:focus {
 form button {
   width: 100%;
   color: white;
-  background-color: #45b1ff;
+  background-color: var(--primary);
   margin-top: 12px;
   padding: 10px 0;
   border: none;
@@ -72,7 +64,7 @@ form .redirect-text {
 
 form .redirect-text a {
   text-decoration: none;
-  color: #45b1ff;
+  color: var(--primary);
 }
 
 form .login {

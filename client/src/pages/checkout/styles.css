@@ -18,6 +18,7 @@
   border-radius: 25px;
   margin: 30px;
   padding: 16px 0;
+  background-color: white;
 }
 
 .cart-item img {
@@ -60,17 +61,17 @@
 .redirect-button {
   width: 150px;
   height: 50px;
-  background-color: #45b1ff;
+  background-color: var(--primary);
   color: white;
   border: none;
   border-radius: 8px;
   margin: 10px;
   cursor: pointer;
-  border: 1px solid #45b1ff;
+  border: 1px solid var(--primary);
   transition: 0.2s all ease-out;
 }
 
 .redirect-button:hover {
-  color: #45b1ff;
+  color: var(--primary);
   background-color: white;
 }
