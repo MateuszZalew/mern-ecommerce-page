@@ -16,7 +16,16 @@
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   margin: 20px;
-  width: 400px;
+  width: 500px;
+}
+
+form {
+  width: 60%;
+  max-width: 300px;
+}
+
+form h2 {
+  text-align: center;
 }
 
 .form-group {
@@ -25,13 +34,53 @@
   margin-bottom: 20px;
 }
 
-label {
+form label {
   font-weight: bold;
   margin-bottom: 5px;
 }
 
-input {
+form input {
   padding: 10px;
   font-size: 16px;
   border-radius: 5px;
+}
+
+form input:focus {
+  background-color: #f9f9f9;
+}
+
+form button {
+  width: 100%;
+  color: white;
+  background-color: #45b1ff;
+  margin-top: 12px;
+  padding: 10px 0;
+  border: none;
+  border-radius: 10px;
+  font-size: 18px;
+  letter-spacing: 1px;
+}
+
+form button:hover {
+  cursor: pointer;
+}
+
+form .redirect-text {
+  font-size: 15px;
+  color: #a3a6ca;
+}
+
+form .redirect-text a {
+  text-decoration: none;
+  color: #45b1ff;
+}
+
+form .login {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+form .register {
+  text-align: center;
 }
