@@ -138,6 +138,7 @@ export const ShopContextProvider = (props) => {
       setCartItems({});
       fetchAvailableMoney();
       fetchPurchasedItems();
+      toast.success("Thank you for your purchase!");
       navigate("/");
     } catch (err) {
       if (err.response.data.type === "no-available-money") {
