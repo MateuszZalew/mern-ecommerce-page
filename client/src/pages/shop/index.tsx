@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import useGetProducts from "../../hooks/useGetProducts";
-import Product from "./product";
+import Product from "../../components/product";
 import "./styles.css";
 import { IShopContext, ShopContext } from "../../context/shop-context";
 import { Navigate } from "react-router-dom";
@@ -10,7 +10,7 @@ const ShopPage = () => {
   const { isAuthenticated } = useContext<IShopContext>(ShopContext);
 
   if (!isAuthenticated) {
-    return <Navigate to="/auth" />;
+    return <Navigate to="/login" />;
   }
 
   return (

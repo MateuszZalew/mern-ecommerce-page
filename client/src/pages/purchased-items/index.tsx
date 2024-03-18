@@ -9,7 +9,7 @@ const PurchasedItemsPage = () => {
   const { isAuthenticated } = useContext<IShopContext>(ShopContext);
 
   if (!isAuthenticated) {
-    return <Navigate to="/auth" />;
+    return <Navigate to="/login" />;
   }
 
   return (
