@@ -2,9 +2,10 @@ import { createContext, useState, useEffect } from "react";
 import useGetProducts from "../hooks/useGetProducts";
 import { IProduct } from "../models/interfaces";
 import { useGetToken } from "../hooks/useGetToken";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 export interface IShopContext {
   addToCart: (itemId: string) => void;
@@ -139,8 +140,11 @@ export const ShopContextProvider = (props) => {
       fetchPurchasedItems();
       navigate("/");
     } catch (err) {
-      console.log(err.response.data.type);
-      alert(err.response.data.type);
+      if (err.response.data.type === "no-available-money") {
+        toast.error("You don't have enough funds");
+      } else {
+        toast.error("Something went wrong");
+      }
     }
   };
 

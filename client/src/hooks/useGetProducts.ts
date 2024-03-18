@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { IProduct } from "../models/interfaces";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 const useGetProducts = () => {
   const [products, setProducts] = useState<IProduct[]>([]);
@@ -12,7 +13,7 @@ const useGetProducts = () => {
       );
       setProducts(fetchedProducts.data.products);
     } catch (error) {
-      alert("ERROR: Something went wrong.");
+      toast.error("ERROR: Something went wrong.");
     }
   };
 
