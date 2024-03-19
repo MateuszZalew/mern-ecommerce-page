@@ -1,6 +1,6 @@
 import { useState, SyntheticEvent, ChangeEvent } from "react";
 import { UserErrors } from "../../../models/errors";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import Loader from "../../../components/loader";
 import axios from "axios";
@@ -76,7 +76,7 @@ const RegisterPage = () => {
         </div>
         <button type="submit">Register</button>
         <p className="redirect-text login">
-          Have an account? <a href="/login">Login</a>
+          Have an account? <Link to="/login">Login</Link>
         </p>
       </form>
     </div>

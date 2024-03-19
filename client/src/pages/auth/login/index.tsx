@@ -1,6 +1,6 @@
 import { useState, SyntheticEvent, ChangeEvent, useContext } from "react";
 import { useCookies } from "react-cookie";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { IShopContext, ShopContext } from "../../../context/shop-context";
 import { UserErrors } from "../../../models/errors";
 import { toast } from "react-toastify";
@@ -91,7 +91,7 @@ const LoginPage = () => {
         </div>
         <button type="submit">Login</button>
         <p className="redirect-text register">
-          Don't have an account? <a href="/register">Create account</a>
+          Don't have an account? <Link to="/register">Create account</Link>
         </p>
       </form>
     </div>
