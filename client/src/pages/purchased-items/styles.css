@@ -3,10 +3,13 @@
 }
 
 .purchased-items {
+  box-sizing: border-box;
   margin-top: 60px;
+  padding: 0 20px;
   width: 100%;
   height: auto;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 40px;
 }

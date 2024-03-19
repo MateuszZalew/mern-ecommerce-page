@@ -7,6 +7,10 @@ body {
   height: 100vh;
 }
 
+* {
+  box-sizing: inherit;
+}
+
 :root {
   --primary: rgb(69, 177, 255);
 }
